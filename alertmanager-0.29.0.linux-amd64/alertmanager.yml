@@ -11,11 +11,11 @@ route:
 receivers:
   - name: 'email-alert'
     email_configs:
-      - to: 'logesh@sixthstar.in'
-        from: 'logesh@sixthstar.in'
-        smarthost: 'star.sixthstar.in:587'
-        auth_username: 'logesh@sixthstar.in'
-        auth_identity: 'logesh@sixthstar.in'
-        auth_password: 'Mlogan@123#'
+      - to: ''
+        from: ''
+        smarthost: ':587'
+        auth_username: ''
+        auth_identity: ''
+        auth_password: ''
         require_tls: true
         send_resolved: true
