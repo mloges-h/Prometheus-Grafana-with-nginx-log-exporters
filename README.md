@@ -1,5 +1,3 @@
----
-
 # 🚀 Centralized Prometheus + Grafana Monitoring for NGINX (with NGINX Log Exporter & Alertmanager)
 
 This project implements a **centralized monitoring system** using:
@@ -289,7 +287,6 @@ Check logs exporter:
 curl http://localhost:9913/metrics | grep status
 ```
 
----
 
 # 🧩 Conclusion
 
@@ -301,5 +298,3 @@ This project provides a **complete production-ready monitoring setup** for NGINX
 * Exporters (status + access.log)
 * Email alerts
 * Dashboards
-
----
