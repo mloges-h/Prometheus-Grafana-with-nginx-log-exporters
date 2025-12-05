@@ -1,0 +1,74 @@
+groups:
+- name: nginx-alerts
+  rules:
+
+  # 1) TOTAL REQUESTS ABOVE 100 PER MINUTE
+  - alert: NginxHighTotalRequests
+    expr: rate(nginx_http_response_count_total[1m]) * 60 > 100
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High total NGINX requests"
+      description: "Total requests exceeded 100 per minute."
+
+  # 2) HIGH 400 ERRORS
+  - alert: NginxHigh4xxErrors
+    expr: round(increase(nginx_http_response_count_total{status=~"4.."}[1m])) > 0
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "NGINX 4xx errors detected"
+      description: "400-level client errors occurred in the last 1 minute."
+
+  # 3) SPECIFIC 200 (OR ANY STATUS) CHECK
+  - alert: NginxStatus200Count
+    expr: round(increase(nginx_http_response_count_total{status="200"}[1m])) > 100
+    for: 1m
+    labels:
+      severity: info
+    annotations:
+      summary: "NGINX 200-count check"
+      description: "200 responses observed in the last 1 minute."
+
+  # 4) HIGH CONNECTIONS HANDLED ( > 100 )
+  - alert: NginxHighConnectionsHandled
+    expr: round(increase(nginx_connections_handled[1m])) > 100
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High number of connections handled"
+      description: "More than 100 connections handled in the last minute."
+
+  # 5) HIGH 500 ERRORS (UPSTREAM FAILURES ALSO INCLUDED)
+  - alert: NginxHigh5xxErrors
+    expr: round(increase(nginx_http_response_count_total{status=~"5.."}[1m])) > 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "NGINX 5xx errors detected"
+      description: "Server-side (500) errors occurred in the last 1 minute."
+
+  # 6) NGINX SERVICE DOWN
+  - alert: NginxServiceDown
+    expr: nginx_up == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "NGINX is DOWN"
+      description: "Nginx service is not responding."
+
+  # 7) EXPORTER DOWN
+  - alert: NginxExporterDown
+    expr: up{job="nginx_monitoring"} == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "NGINX Exporter DOWN"
+      description: "Prometheus cannot scrape metrics from the exporter."
+

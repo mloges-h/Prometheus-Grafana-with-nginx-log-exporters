@@ -1,0 +1,22 @@
+# Ignore Prometheus binary & dirs
+prometheus-*/prometheus
+prometheus-*/promtool
+prometheus-*/data/
+prometheus-*.tar.gz
+
+# Ignore Alertmanager binaries & dirs
+alertmanager-*/alertmanager
+alertmanager-*/amtool
+alertmanager-*.tar.gz
+alertmanager-*/data/
+
+# Ignore Grafana installer
+grafana*.deb
+
+# Ignore extracted monitoring folder binaries
+monitoring/monitoring
+
+# Ignore any large binary or archive
+*.tar.gz
+*.zip
+*.deb
