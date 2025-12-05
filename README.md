@@ -193,10 +193,10 @@ Enable SMTP in:
 ```ini
 [smtp]
 enabled = true
-host = :587
-user = 
+host = star.sixthstar.in:587
+user = logesh@sixthstar.in
 password = "********"
-from_address = logesh@.in
+from_address = logesh@sixthstar.in
 from_name = Grafana Alerts
 startTLS_policy = OpportunisticStartTLS
 ```
